@@ -6,13 +6,11 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:57:10 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 04:06:29 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 04:29:41 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
-
-static void	free_matrix(char **matrix);
 
 void	handle_errors(int signal, t_data *data)
 {
@@ -34,7 +32,7 @@ void	free_exit(t_data *data)
 	exit(0);
 }
 
-static void	free_matrix(char **matrix)
+void	free_matrix(char **matrix)
 {
 	int	i;
 

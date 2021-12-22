@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:05:58 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 04:07:50 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:35:51 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ int	main(int argc, char *argv[], char *envp[])
 	open_files(&data);
 	data.file_path = file_found(data.arg1[0]);
 	pipex_in(&data, envp);
+	free(data.file_path);
 	waitpid(data.pid_1, NULL, 0);
 	data.file_path = file_found(data.arg2[0]);
 	pipex_out(&data, envp);
+	free(data.file_path);
 	close(data.fd[0]);
 	close(data.fd[1]);
 	close(data.file_in);
@@ -49,8 +51,14 @@ static void	init_args(char *argv[], t_data *data)
 
 static void	parse_args(t_data *data)
 {
-	data->arg1 = ft_split(data->cmd1, ' ');
-	data->arg2 = ft_split(data->cmd2, ' ');
+	if (treat_space(data->cmd1))
+		data->arg1 = ft_split(data->cmd1, ';');
+	else
+		data->arg1 = ft_split(data->cmd1, ' ');
+	if (treat_space(data->cmd2))
+		data->arg2 = ft_split(data->cmd2, ';');
+	else
+		data->arg2 = ft_split(data->cmd2, ' ');
 }
 
 static void	open_files(t_data *data)
@@ -78,7 +86,9 @@ char	*file_found(char *command)
 	{
 		command_path = ft_strjoin(paths[i], command);
 		if (!access(command_path, F_OK))
+		{
 			return (command_path);
+		}
 		free(command_path);
 		i++;
 	}

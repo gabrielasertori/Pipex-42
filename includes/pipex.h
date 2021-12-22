@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 04:06:33 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:27:56 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ typedef struct s_data {
 void	handle_errors(int signal, t_data *data);
 void	pipex_in(t_data *data, char *envp[]);
 void	pipex_out(t_data *data, char *envp[]);
+void	free_matrix(char **matrix);
 void	free_exit(t_data *data);
 char	*file_found(char *command);
+int		treat_space(char *command);
 void	ft_putendl_fd(char *s, int fd);
 int		ft_strncmp(const char *s1, const char *s2, size_t size);
 char	*ft_strjoin(char *s1, char const *s2);
@@ -54,5 +56,6 @@ char	**ft_split(char const *s, char c);
 size_t	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nbr, size_t size);
+char	*ft_strnstr(const char *s1, const char *s2, size_t	n);
 
 #endif
