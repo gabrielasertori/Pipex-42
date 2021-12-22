@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:57:10 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 19:07:39 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:56:56 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void	handle_errors(int signal, t_data *data)
 {
 	if (signal == 0)
-		ft_putendl_fd("\e[0;31mFew arguments\e[0m", 1);
+	{
+		ft_putendl_fd("\e[0;31mInvalid arguments\e[0m", 1);
+		exit (0);
+	}
 	if (signal == 1)
 		ft_putendl_fd("\e[0;31mNot a valid infile\e[0m", 1);
 	if (signal == 2)
@@ -45,4 +48,5 @@ void	free_matrix(char **matrix)
 		i++;
 	}
 	free(matrix);
+	matrix = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:05:58 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 19:08:58 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:57:55 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char *argv[], char *envp[])
 		handle_errors(4, &data);
 	pipex_in(&data, envp);
 	free(data.file_path);
-	waitpid(data.pid_1, NULL, 0);
+	// waitpid(data.pid_1, NULL, 0);
 	data.file_path = file_found(data.arg2[0]);
 	if (!data.file_path)
 		handle_errors(4, &data);
@@ -90,7 +90,11 @@ char	*file_found(char *command)
 	{
 		command_path = ft_strjoin(paths[i], command);
 		if (!access(command_path, F_OK))
+		{
+			free_matrix(paths);
 			return (command_path);
+		}
+		// free(paths[i]);
 		free(command_path);
 		i++;
 	}

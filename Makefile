@@ -6,7 +6,7 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2021/12/22 16:59:06 by gcosta-d         ###   ########.fr        #
+#    Updated: 2021/12/22 21:41:10 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	gcc -o $(NAME) ./src/main.c $(OBJ) -I./includes
+	gcc $(CFLAGS) -o $(NAME) ./src/main.c $(OBJ) -I./includes
 	$(SUCCESS)
 
 clean:

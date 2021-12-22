@@ -6,13 +6,13 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:17:32 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 04:23:31 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:53:59 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-static int	str_in_array(const char *s, char delimiter);
+static int	str_in_array(char *s, char delimiter);
 
 void	ft_putendl_fd(char *s, int fd)
 {
@@ -24,7 +24,7 @@ void	ft_putendl_fd(char *s, int fd)
 	write (fd, "\n", 1);
 }
 
-char	*ft_strjoin(char *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	unsigned int	i;
 	unsigned int	j;
@@ -49,11 +49,11 @@ char	*ft_strjoin(char *s1, char const *s2)
 		s3[i + j] = s2[j];
 		j++;
 	}
-	free(s1);
+	// free(s1);
 	return (s3);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char			**arr;
 	unsigned int	j;
@@ -82,7 +82,7 @@ char	**ft_split(char const *s, char c)
 	return (arr);
 }
 
-static int	str_in_array(const char *s, char delimiter)
+static int	str_in_array(char *s, char delimiter)
 {
 	unsigned int	qnt;
 

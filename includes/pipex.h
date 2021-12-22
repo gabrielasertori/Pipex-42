@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 18:27:56 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 21:58:04 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct s_data {
 	char	*file2;
 	char	**arg1;
 	char	**arg2;
+	// char	**path;
 	char	*cmd1;
 	char	*cmd2;
 	char	*file_path;
@@ -50,10 +51,10 @@ void	free_exit(t_data *data);
 char	*file_found(char *command);
 int		treat_space(char *command);
 void	ft_putendl_fd(char *s, int fd);
-int		ft_strncmp(const char *s1, const char *s2, size_t size);
-char	*ft_strjoin(char *s1, char const *s2);
-char	**ft_split(char const *s, char c);
-size_t	ft_strlcpy(char *dest, const char *src, size_t size);
+// int		ft_strncmp(const char *s1, const char *s2, size_t size);
+char	*ft_strjoin(char *s1, char *s2);
+char	**ft_split(char *s, char c);
+size_t	ft_strlcpy(char *dest, char *src, size_t size);
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nbr, size_t size);
 char	*ft_strnstr(const char *s1, const char *s2, size_t	n);

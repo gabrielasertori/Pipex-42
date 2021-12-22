@@ -6,13 +6,13 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 03:55:18 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 19:04:33 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 20:45:22 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-size_t	ft_strlcpy(char *dest, const char *src, size_t size)
+size_t	ft_strlcpy(char *dest, char *src, size_t size)
 {
 	size_t	src_len;
 	size_t	j;
