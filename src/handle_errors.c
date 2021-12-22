@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:57:10 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 04:29:41 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:07:39 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	handle_errors(int signal, t_data *data)
 		ft_putendl_fd("\e[0;31mPipe doesn't work\e[0m", 1);
 	if (signal == 3)
 		ft_putendl_fd("\e[0;31mFork doesn't work\e[0m", 1);
+	if (signal == 4)
+		ft_putendl_fd("\e[0;31mPath doesn't found\e[0m", 1);
 	free_exit(data);
 }
 

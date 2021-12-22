@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:31:56 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 18:29:18 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:04:05 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,14 @@ int	treat_space(char *command)
 				command[i] = ';';
 			else if (command[i] == '\'')
 			{
+				command[i] = ';';
 				i++;
 				while (command[i] == ' ')
-				{
 					i++;
-				}
+				command[i] = ';';
 			}
 			i++;
 		}
 	}
 	return (is_space);
 }
-
-// "tr;/;' '"
-// "tr;' ';/"

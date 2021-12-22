@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 03:55:18 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 17:03:44 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/22 19:04:33 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	*ft_calloc(size_t nbr, size_t size)
 	}
 	return ((void *) pointer);
 }
-
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t	n)
 {
