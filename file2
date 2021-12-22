@@ -1,4 +1,0 @@
-This is the first line
-This is the second
-If I pass this file with grep
-It needs to result in 2 lines with wc

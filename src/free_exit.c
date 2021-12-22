@@ -1,22 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_here_doc.c                                  :+:      :+:    :+:   */
+/*   free_exit.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/15 21:36:53 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/16 00:39:10 by gcosta-d         ###   ########.fr       */
+/*   Created: 2021/12/21 23:52:28 by gcosta-d          #+#    #+#             */
+/*   Updated: 2021/12/22 00:01:07 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-void	handle_here_doc(char *argv[], t_data *data)
+void	free_exit(t_data *data)
 {
-	data->file1 = argv[2];
-	data->file_ok = access(data->file1, F_OK);
+	free_matrix(data);
+}
 
-	if (data->file_ok == -1)
-		handle_errors(1);
+void	free_matrix(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (i < data->cmds_list)
+	{
+		free(data->cmds[i]);
+		i++;
+	}
+	free(data->cmds);
 }
