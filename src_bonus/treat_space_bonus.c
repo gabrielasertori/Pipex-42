@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   treat_space.c                                      :+:      :+:    :+:   */
+/*   treat_space_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 16:31:56 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 19:04:05 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:49:14 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes_bonus/pipex_bonus.h"
 
 int	treat_space(char *command)
 {

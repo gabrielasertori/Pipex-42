@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.c                                            :+:      :+:    :+:   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 21:58:21 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/03 19:05:08 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes_bonus/pipex_bonus.h"
 
 void	pipex_in(t_data *data, char *envp[])
 {

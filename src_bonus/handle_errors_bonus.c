@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_errors.c                                    :+:      :+:    :+:   */
+/*   handle_errors_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:57:10 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/23 17:40:47 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:48:28 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../includes_bonus/pipex_bonus.h"
 
 void	handle_errors(int signal, t_data *data)
 {
