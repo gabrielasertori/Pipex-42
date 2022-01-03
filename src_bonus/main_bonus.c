@@ -6,44 +6,44 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:05:58 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/03 22:31:54 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/03 23:09:31 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
 
 static void	parse_args(t_data *data);
-static void	open_files(t_data *data);
+static void	open_files(t_data *data, char *argv[]);
 
-int	main(int argc, char *argv[])
+int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	data;
+	int		i;
 
 	if (argc < 5)
 		handle_errors(0, &data);
 	else
 		init_args(argc, argv, &data);
-	open_files(&data);
+	open_files(&data, argv);
 	parse_args(&data);
 
-	// pipex_in(&data, envp);
-	// free(data.file_path);
-	// // waitpid(data.pid_1, NULL, 0);
-	// data.file_path = file_found(data.arg2[0]);
-	// if (!data.file_path)
-	// 	handle_errors(4, &data);
-	// pipex_out(&data, envp);
-	// free(data.file_path);
-	// close(data.fd[0]);
-	// close(data.fd[1]);
-	// close(data.file_in);
-	// close(data.file_out);
-	// waitpid(data.pid_2, NULL, 0);
-	// free_exit(&data);
+	data.pipe_ok = pipe(data.fd);
+	if (data.pipe_ok == -1)
+		handle_errors(2, &data);
+
+	data.pid = fork();
+	if (data.pid == -1)
+		handle_errors(3, &data);
+
+	i = 0;
+	pipex(&data, envp, i);
+
+	waitpid(data.pid, NULL, 0);
+	free_exit(&data);
 	return (0);
 }
 
-static void	open_files(t_data *data)
+static void	open_files(t_data *data, char *argv[])
 {
 	if (data->file1)
 	{
@@ -51,15 +51,12 @@ static void	open_files(t_data *data)
 		if (data->file_in == -1)
 			handle_errors(1, data);
 	}
-	if (data->limiter)
+	if (ft_strnstr(argv[1], "here_doc", 8))
 		data->file_out = open(data->file2, O_WRONLY | O_CREAT | O_APPEND, 0744);
 	else
 		data->file_out = open(data->file2, O_WRONLY | O_CREAT | O_TRUNC, 0744);
 	if (data->file_out == -1)
 		handle_errors(4, data);
-	// data->pipe_ok = pipe(data->fd);
-	// if (data->pipe_ok == -1)
-	// 	handle_errors(2, data);
 }
 
 static void	parse_args(t_data *data)

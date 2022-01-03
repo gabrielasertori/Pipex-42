@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/03 21:09:56 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/03 22:59:33 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,38 +26,31 @@
 /:/sbin/:/bin/:/usr/games/:/usr/local/games/:/snap/bin"
 
 typedef struct s_data {
+	char	***args;
+	char	**cmds;
+	char	**file_path;
 	char	*file1;
 	char	*file2;
 	char	*limiter;
-	char	**arg1;
-	char	**arg2;
-	// char	**path;
-	char	***args;
-	char	*cmd1;
-	char	*cmd2;
-	char	**cmds;
-	char	**file_path;
 	int		qnt_cmds;
 	int		file_ok;
 	int		pipe_ok;
-	int		pid_1;
-	int		pid_2;
+	int		pid;
 	int		fd[2];
 	int		file_in;
 	int		file_out;
 }	t_data;
 
 void	handle_errors(int signal, t_data *data);
-void	pipex_in(t_data *data, char *envp[]);
-void	pipex_out(t_data *data, char *envp[]);
+void	pipex(t_data *data, char *envp[], int i);
 void	free_matrix(char **matrix);
 void	free_exit(t_data *data);
 char	*file_found(char *command);
 int		treat_space(char *command);
-void	ft_putendl_fd(char *s, int fd);
 void	init_args(int argc, char *argv[], t_data *data);
 void	init_hdoc_args(char *argv[], t_data *data);
 void	init_multi_args(int argc, char *argv[], t_data *data);
+void	ft_putendl_fd(char *s, int fd);
 char	*ft_strjoin(char *s1, char *s2);
 char	**ft_split(char *s, char c);
 size_t	ft_strlcpy(char *dest, char *src, size_t size);
