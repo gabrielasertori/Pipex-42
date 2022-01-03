@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:05:58 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/22 21:57:55 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2021/12/23 17:05:50 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,9 @@ char	*file_found(char *command)
 			free_matrix(paths);
 			return (command_path);
 		}
-		// free(paths[i]);
 		free(command_path);
 		i++;
 	}
+	free_matrix(paths);
 	return (NULL);
 }
