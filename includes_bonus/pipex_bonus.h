@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/03 20:42:39 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/03 21:09:56 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ typedef struct s_data {
 	char	**arg1;
 	char	**arg2;
 	// char	**path;
-	char	**args;
+	char	***args;
 	char	*cmd1;
 	char	*cmd2;
 	char	**cmds;
-	char	*file_path;
+	char	**file_path;
 	int		qnt_cmds;
 	int		file_ok;
 	int		pipe_ok;

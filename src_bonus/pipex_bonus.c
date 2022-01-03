@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/03 19:05:08 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/03 21:11:59 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	pipex_in(t_data *data, char *envp[])
 		close(data->fd[1]);
 		close(data->file_in);
 		close(data->file_out);
-		execve(data->file_path, data->arg1, envp);
+		execve(data->file_path[0], data->arg1, envp);
 	}
 }
 
@@ -42,6 +42,6 @@ void	pipex_out(t_data *data, char *envp[])
 		close(data->fd[1]);
 		close(data->file_in);
 		close(data->file_out);
-		execve(data->file_path, data->arg2, envp);
+		execve(data->file_path[0], data->arg2, envp);
 	}
 }
