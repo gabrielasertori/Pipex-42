@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:05:58 by gcosta-d          #+#    #+#             */
-/*   Updated: 2021/12/23 17:05:50 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/03 18:37:27 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,14 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_data	data;
 
-	if (argc != 5)
+	if (argc < 5)
 		handle_errors(0, &data);
-	init_args(argv, &data);
+	if (argc == 6 && ft_strnstr(argv[1], "here_doc", 8))
+		init_hdoc_args(argv, &data);
+	else if (argc > 5)
+		init_multi_args(argv, &data);
+	else
+		init_args(argv, &data);
 	parse_args(&data);
 	open_files(&data);
 	data.file_path = file_found(data.arg1[0]);
