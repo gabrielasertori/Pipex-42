@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/03 22:59:33 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/04 02:36:42 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,17 +32,18 @@ typedef struct s_data {
 	char	*file1;
 	char	*file2;
 	char	*limiter;
+	int		*pid;
+	int		heredoc;
 	int		qnt_cmds;
 	int		file_ok;
 	int		pipe_ok;
-	int		pid;
 	int		fd[2];
 	int		file_in;
 	int		file_out;
 }	t_data;
 
 void	handle_errors(int signal, t_data *data);
-void	pipex(t_data *data, char *envp[], int i);
+void	pipex(t_data *data, char *envp[]);
 void	free_matrix(char **matrix);
 void	free_exit(t_data *data);
 char	*file_found(char *command);
