@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/04 03:00:12 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/04 03:03:51 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ void	pipex(t_data *data, char *envp[])
 		handle_errors(3, data);
 	if (data->pid[i] == 0)
 		execute_commands(data, envp, i, cmds);
+
+	cmds--;
+	i++;
+	data->pid[i] = fork();
+	if (data->pid[i] == -1)
+		handle_errors(3, data);
+	if (data->pid[i] == 0)
+		execute_commands(data, envp, i, cmds);
+
 	cmds--;
 	i++;
 	data->pid[i] = fork();
@@ -43,6 +52,7 @@ void	pipex(t_data *data, char *envp[])
 		execute_commands(data, envp, i, cmds);
 
 	waitpid(data->pid[0], NULL, 0);
+	//waitpid(data->pid[1], NULL, 0);
 
 }
 
@@ -62,16 +72,19 @@ static void	resolve_dups(t_data *data, int cmds)
 	{
 		dup2(data->file_in, STDIN_FILENO);
 		dup2(data->fd[1], STDOUT_FILENO);
+		write(2, "grep\n", 6);
 	}
 	else if (cmds == 1)
 	{
 		dup2(data->fd[0], STDIN_FILENO);
 		dup2(data->file_out, STDOUT_FILENO);
+		write(2, "cat\n", 6);
 	}
 	else
 	{
 		dup2(data->fd[0], STDIN_FILENO);
 		dup2(data->fd[1], STDOUT_FILENO);
+		write(2, "wc -l\n", 6);
 	}
 }
 
