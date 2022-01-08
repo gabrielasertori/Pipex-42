@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/04 03:03:51 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/08 15:54:51 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,47 +22,44 @@ void	pipex(t_data *data, char *envp[])
 {
 	int	cmds;
 	int	i;
+	int	pid;
 
 	cmds = data->qnt_cmds;
 	i = 0;
-	data->pipe_ok = pipe(data->fd);
-	if (data->pipe_ok == -1)
-		handle_errors(2, data);
-
-	data->pid[i] = fork();
-	if (data->pid[i] == -1)
-		handle_errors(3, data);
-	if (data->pid[i] == 0)
-		execute_commands(data, envp, i, cmds);
-
-	cmds--;
-	i++;
-	data->pid[i] = fork();
-	if (data->pid[i] == -1)
-		handle_errors(3, data);
-	if (data->pid[i] == 0)
-		execute_commands(data, envp, i, cmds);
-
-	cmds--;
-	i++;
-	data->pid[i] = fork();
-	if (data->pid[i] == -1)
-		handle_errors(3, data);
-	if (data->pid[i] == 0)
-		execute_commands(data, envp, i, cmds);
-
-	waitpid(data->pid[0], NULL, 0);
-	//waitpid(data->pid[1], NULL, 0);
-
+	while (cmds)
+	{
+		if (i == 0)
+		{
+			data->pipe_ok = pipe(data->fd);
+			if (data->pipe_ok == -1)
+				handle_errors(2, data);
+		}
+		else if (i % 2 != 0)
+		{
+			data->pipe_ok = pipe(data->new_fd);
+			if (data->pipe_ok == -1)
+				handle_errors(2, data);
+		}
+		pid = fork();
+		if (pid == -1)
+			handle_errors(3, data);
+		if (pid == 0)
+			execute_commands(data, envp, i, cmds);
+		waitpid(pid, NULL, 0);
+		cmds--;
+		i++;
+		if (i == 1)
+			close(data->fd[1]);
+		else if (cmds == 1)
+			close(data->new_fd[1]);
+	}
+	close(data->file_in);
+	close(data->file_out);
 }
 
 static void	execute_commands(t_data *data, char *envp[], int i, int cmd)
 {
 	resolve_dups(data, cmd);
-	close(data->fd[0]);
-	close(data->fd[1]);
-	close(data->file_in);
-	close(data->file_out);
 	execve(data->file_path[i], data->args[i], envp);
 }
 
@@ -72,19 +69,21 @@ static void	resolve_dups(t_data *data, int cmds)
 	{
 		dup2(data->file_in, STDIN_FILENO);
 		dup2(data->fd[1], STDOUT_FILENO);
-		write(2, "grep\n", 6);
+		write(2, "hey\n", 4);
 	}
 	else if (cmds == 1)
 	{
-		dup2(data->fd[0], STDIN_FILENO);
+		dup2(data->new_fd[0], STDIN_FILENO);
 		dup2(data->file_out, STDOUT_FILENO);
-		write(2, "cat\n", 6);
+		close(data->new_fd[1]);
+		write(2, "Lets go\n", 8);
 	}
 	else
 	{
 		dup2(data->fd[0], STDIN_FILENO);
-		dup2(data->fd[1], STDOUT_FILENO);
-		write(2, "wc -l\n", 6);
+		dup2(data->new_fd[1], STDOUT_FILENO);
+		close(data->fd[0]);
+		write(2, "ho\n", 3);
 	}
 }
 

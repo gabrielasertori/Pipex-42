@@ -6,7 +6,7 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/01/03 19:25:01 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/01/04 14:40:06 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SRC = $(SRC_PATH)pipex_utils.c \
 	$(SRC_PATH)treat_space.c
 OBJ_PATH = ./objs/
 OBJ = $(subst $(SRC_PATH),$(OBJ_PATH),$(SRC:%.c=%.o))
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 SUCCESS = @echo "\033[36m-----------\033[0m" && \
 	echo "\033[36m| SUCCESS |\033[0m" && \
 	echo "\033[36m-----------\033[0m"
@@ -53,7 +53,8 @@ SRC_BONUS = $(SRC_PATH_BONUS)pipex_utils_bonus.c \
 	$(SRC_PATH_BONUS)handle_errors_bonus.c \
 	$(SRC_PATH_BONUS)pipex_utils_bonus_2.c \
 	$(SRC_PATH_BONUS)treat_space_bonus.c \
-	$(SRC_PATH_BONUS)init_bonus.c
+	$(SRC_PATH_BONUS)init_bonus.c \
+	$(SRC_PATH_BONUS)here_doc.c
 OBJ_PATH_BONUS = ./objs_bonus/
 OBJ_BONUS = $(subst $(SRC_PATH_BONUS),$(OBJ_PATH_BONUS),$(SRC_BONUS:%.c=%.o))
 

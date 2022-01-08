@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:05:58 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/04 02:28:59 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/08 15:13:05 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,18 @@ int	main(int argc, char *argv[], char *envp[])
 		init_args(argc, argv, &data);
 	open_files(&data);
 	parse_args(&data);
-	pipex(&data, envp);
-	free_exit(&data);
+	if (data.heredoc == 1)
+		here_doc(&data);
+	else
+		pipex(&data, envp);
+	//free_exit(&data);
 	return (0);
 }
 
 static void	open_files(t_data *data)
 {
 	if (data->heredoc == 1)
-		data->file_out = open(data->file2, O_WRONLY | O_CREAT | O_APPEND, 0744);
+		data->file_out = open(data->file2, O_RDWR | O_CREAT | O_APPEND, 0744);
 	else
 	{
 		data->file_in = open(data->file1, O_RDONLY);
@@ -50,8 +53,8 @@ static void	parse_args(t_data *data)
 
 	i = 0;
 	cmds = data->qnt_cmds;
-	data->args = malloc(sizeof(char ***));
-	data->file_path = malloc(sizeof(char **));
+	data->args = malloc(sizeof(char ***) + 1);
+	data->file_path = malloc(sizeof(char **) + 1);
 	while (cmds)
 	{
 		if (treat_space(data->cmds[i]))
@@ -64,6 +67,8 @@ static void	parse_args(t_data *data)
 		i++;
 		cmds--;
 	}
+	data->args[i] = NULL;
+	data->file_path[i] = NULL;
 }
 
 char	*file_found(char *command)

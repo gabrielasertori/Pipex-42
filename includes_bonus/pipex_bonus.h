@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/04 02:36:42 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/08 15:09:20 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@
 # include <stdio.h>
 
 # define VALID_PATHS "/usr/local/sbin/:/usr/local/bin/:/usr/sbin/:/usr/bin\
-/:/sbin/:/bin/:/usr/games/:/usr/local/games/:/snap/bin"
+/:/sbin/:/bin/:/usr/games/:/usr/local/games/:/snap/bin/"
+# define MAX_FD 256
+# define BUFFER_SIZE 1
 
 typedef struct s_data {
 	char	***args;
@@ -32,12 +34,14 @@ typedef struct s_data {
 	char	*file1;
 	char	*file2;
 	char	*limiter;
-	int		*pid;
+	char	*str_gnl;
+	char	*env;
 	int		heredoc;
 	int		qnt_cmds;
 	int		file_ok;
 	int		pipe_ok;
 	int		fd[2];
+	int		new_fd[2];
 	int		file_in;
 	int		file_out;
 }	t_data;
@@ -51,6 +55,9 @@ int		treat_space(char *command);
 void	init_args(int argc, char *argv[], t_data *data);
 void	init_hdoc_args(char *argv[], t_data *data);
 void	init_multi_args(int argc, char *argv[], t_data *data);
+void	here_doc(t_data *data);
+
+char	*get_next_line(int fd);
 void	ft_putendl_fd(char *s, int fd);
 char	*ft_strjoin(char *s1, char *s2);
 char	**ft_split(char *s, char c);
@@ -58,5 +65,8 @@ size_t	ft_strlcpy(char *dest, char *src, size_t size);
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nbr, size_t size);
 char	*ft_strnstr(const char *s1, const char *s2, size_t	n);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *src);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

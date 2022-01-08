@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:57:10 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/03 22:36:19 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/04 14:57:03 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,17 @@ void	free_exit(t_data *data)
 	int i;
 
 	i = 0;
-	free_matrix(data->file_path);
-	while (data->cmds)
+	if (data->file_path)
+		free_matrix(data->file_path);
+	if (data->args)
 	{
-		free_matrix(data->args[i]);
-		i++;
-		data->cmds--;
+		while (data->cmds)
+		{
+			free_matrix(data->args[i]);
+			i++;
+			data->cmds--;
+		}
+		free(data->args);
 	}
 	exit(0);
 }
