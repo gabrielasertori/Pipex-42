@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:57:10 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/04 14:57:03 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:15:20 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,25 @@ void	handle_errors(int signal, t_data *data)
 {
 	if (signal == 0)
 	{
-		ft_putendl_fd("\e[0;31mInvalid arguments\e[0m", 1);
+		ft_putendl_fd("\e[0;31mInvalid arguments\e[0m", 2);
 		exit (0);
 	}
 	if (signal == 1)
-		ft_putendl_fd("\e[0;31mNot a valid infile\e[0m", 1);
+		ft_putendl_fd("\e[0;31mNot a valid infile\e[0m", 2);
 	if (signal == 2)
-		ft_putendl_fd("\e[0;31mPipe doesn't work\e[0m", 1);
+		ft_putendl_fd("\e[0;31mPipe doesn't work\e[0m", 2);
 	if (signal == 3)
-		ft_putendl_fd("\e[0;31mFork doesn't work\e[0m", 1);
+		ft_putendl_fd("\e[0;31mFork doesn't work\e[0m", 2);
 	if (signal == 4)
 	{
-		ft_putendl_fd("\e[0;31mCommand doesn't found\e[0m", 1);
+		ft_putendl_fd("\e[0;31mCommand doesn't found\e[0m", 2);
 		exit(127);
 	}
-	free_exit(data);
+	if (signal == 5)
+		ft_putendl_fd("\e[0;31mMalloc failed\e[0m", 2);
+	printf("%d\n", data->qnt_cmds);
+	exit(0);
+	//free_exit(data);
 }
 
 void	free_exit(t_data *data)

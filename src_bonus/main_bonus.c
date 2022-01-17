@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:05:58 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/08 15:13:05 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:18:43 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ int	main(int argc, char *argv[], char *envp[])
 		init_args(argc, argv, &data);
 	open_files(&data);
 	parse_args(&data);
+	data.env = envp;
 	if (data.heredoc == 1)
 		here_doc(&data);
 	else
 		pipex(&data, envp);
 	//free_exit(&data);
-	return (0);
+	exit(0);
 }
 
 static void	open_files(t_data *data)
