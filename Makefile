@@ -6,7 +6,7 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/01/18 21:33:50 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/01/19 00:17:41 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,26 +47,46 @@ re: fclean all
 
 #------- BONUS -------
 NAME_BONUS = ./pipex_bonus
+
 SRC_PATH_BONUS = ./src_bonus/
-SRC_BONUS = $(SRC_PATH_BONUS)pipex_utils_bonus.c \
-	$(SRC_PATH_BONUS)pipex_bonus.c \
+SRC_BONUS = $(SRC_PATH_BONUS)pipex_bonus.c \
 	$(SRC_PATH_BONUS)handle_errors_bonus.c \
-	$(SRC_PATH_BONUS)pipex_utils_bonus_2.c \
 	$(SRC_PATH_BONUS)init_bonus.c \
 	$(SRC_PATH_BONUS)here_doc.c \
 	$(SRC_PATH_BONUS)command_finder.c \
 	$(SRC_PATH_BONUS)parse_argv.c
+
+UTILS_PATH_BONUS = ./utils_bonus/
+UTILS_BONUS = $(UTILS_PATH_BONUS)ft_calloc.c \
+	$(UTILS_PATH_BONUS)ft_split.c \
+	$(UTILS_PATH_BONUS)ft_strchr.c \
+	$(UTILS_PATH_BONUS)ft_strdup.c \
+	$(UTILS_PATH_BONUS)ft_strjoin.c \
+	$(UTILS_PATH_BONUS)ft_strlen.c \
+	$(UTILS_PATH_BONUS)ft_substr.c \
+	$(UTILS_PATH_BONUS)ft_strnstr.c \
+	$(UTILS_PATH_BONUS)gnl.c
+
 OBJ_PATH_BONUS = ./objs_bonus/
-OBJ_BONUS = $(subst $(SRC_PATH_BONUS),$(OBJ_PATH_BONUS),$(SRC_BONUS:%.c=%.o))
+OBJ_SRC_BONUS = $(subst $(SRC_PATH_BONUS),$(OBJ_PATH_BONUS),$(SRC_BONUS:%.c=%.o))
+
+OBJ_UTILS_PATH_BONUS = ./objs_utils_bonus/
+OBJ_UTILS_BONUS = $(subst $(UTILS_PATH_BONUS),$(OBJ_UTILS_PATH_BONUS),$(UTILS_BONUS:%.c=%.o))
+
 
 $(OBJ_PATH_BONUS)%.o: $(SRC_PATH_BONUS)%.c
+	echo "huraai"
 	mkdir -p objs_bonus
+	gcc $(CFLAGS) -c $< -o $@
+
+$(OBJ_UTILS_PATH_BONUS)%.o: $(UTILS_PATH_BONUS)%.c
+	mkdir -p objs_utils_bonus
 	gcc $(CFLAGS) -c $< -o $@
 
 bonus: $(NAME_BONUS)
 
-$(NAME_BONUS): $(OBJ_BONUS)
-	gcc $(CFLAGS) -o $(NAME_BONUS) ./src_bonus/main_bonus.c $(OBJ_BONUS) -I./includes_bonus
+$(NAME_BONUS): $(OBJ_SRC_BONUS) $(OBJ_UTILS_BONUS)
+	gcc $(CFLAGS) -o $(NAME_BONUS) ./src_bonus/main_bonus.c $(OBJ_SRC_BONUS) $(OBJ_UTILS_BONUS) -I./includes_bonus
 	$(SUCCESS)
 
 b_clean:

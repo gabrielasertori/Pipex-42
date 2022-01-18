@@ -6,33 +6,11 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 03:55:18 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/18 21:32:31 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 22:03:00 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
-
-void	*ft_calloc(size_t nbr, size_t size)
-{
-	char	*p;
-	char	*pointer;
-	size_t	amount;
-	size_t	i;
-
-	amount = nbr * size;
-	p = (char *) malloc(amount);
-	if (!p)
-		return (NULL);
-	pointer = p;
-	i = 0;
-	while (i < amount)
-	{
-		*p = 0;
-		i++;
-		p++;
-	}
-	return ((void *) pointer);
-}
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t	n)
 {

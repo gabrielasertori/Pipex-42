@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/18 21:56:59 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 22:07:49 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,13 @@ char	*command_finder(char *command);
 char	**parse_argv(t_data *data, char *command);
 // ===== LIBFT FUNCTIONS =====
 char	*get_next_line(int fd);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *src);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char *s1, char *s2);
 char	**ft_split(char *s, char c);
-size_t	ft_strlen(const char *s);
-void	*ft_calloc(size_t nbr, size_t size);
 char	*ft_strnstr(const char *s1, const char *s2, size_t	n);
+void	*ft_calloc(size_t nbr, size_t size);
+size_t	ft_strlen(const char *s);
 
 #endif
