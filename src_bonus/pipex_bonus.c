@@ -6,144 +6,79 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/17 18:23:53 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 21:13:44 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
 
-static void	execute_commands(t_data *data, char *envp[], int fd[], int index);
-static void	resolve_dups(t_data *data, int fd[], int index);
+static void	execute_commands(t_data *data, int index, char *argv[], char *envp[]);
+static void	resolve_dups(t_data *data, int index);
 
-void	pipex(t_data *data, char *envp[])
+void	pipex(t_data *data, char *argv[], char *envp[])
 {
 	int	index;
-	int	fd[2];
-	int	pid;
 
 	index = 0;
+	dup2(data->file_in, STDIN_FILENO);
 	while (index < data->qnt_cmds)
 	{
-		if (index < data->qnt_cmds - 1)
-		{
-			data->pipe_ok = pipe(fd);
-			if (data->pipe_ok == -1)
-				handle_errors(2, data);
-		}
-		pid = fork();
-		if (pid == -1)
+		if (index > 0)
+			dup2(data->fd[0], STDIN_FILENO);
+		if (pipe(data->fd) == -1)
+			handle_errors(2, data);
+		data->pid = fork();
+		if (data->pid == -1)
 			handle_errors(3, data);
-		if (pid == 0)
-			execute_commands(data, envp, fd, index);
-		waitpid(pid, NULL, 0);
-		close(fd[1]);
-		index++;
+		if (data->pid == 0)
+		{
+			close(data->fd[0]);
+			execute_commands(data, index, argv, envp);
+		}
+		else
+		{
+			waitpid(data->pid, NULL, 0);
+			close(data->fd[1]);
+			index++;
+		}
 	}
-	close(data->file_in);
 	close(data->file_out);
 }
 
-static void	execute_commands(t_data *data, char *envp[], int fd[], int index)
+static void	execute_commands(t_data *data, int index, char *argv[], char *envp[])
 {
-	resolve_dups(data, fd, index);
-	execve(data->file_path[index], data->args[index], envp);
+	char	**command_parsed;
+
+	command_parsed = parse_args(data, argv[index + 2]);
+	data->file_path = command_finder(command_parsed[0]);
+	if (data->file_path == NULL)
+		handle_errors(4, data);
+	resolve_dups(data, index);
+	if (execve(data->file_path, command_parsed, envp) == -1)
+		handle_errors(6, data);
 }
 
-static void	resolve_dups(t_data *data, int fd[], int index)
+static void	resolve_dups(t_data *data, int index)
 {
-	if (index == 0)
-	{
-		dup2(data->file_in, STDIN_FILENO);
-		dup2(fd[1], STDOUT_FILENO);
-		write(2, "hey\n", 4);
-	}
-	else if (index == data->qnt_cmds - 1)
-	{
-		dup2(fd[0], STDIN_FILENO);
+	if (index == data->qnt_cmds - 1)
 		dup2(data->file_out, STDOUT_FILENO);
-		write(2, "Lets go\n", 8);
-	}
 	else
-	{
-		dup2(fd[0], STDIN_FILENO);
-		dup2(fd[1], STDOUT_FILENO);
-		write(2, "ho\n", 3);
-	}
+		dup2(data->fd[1], STDOUT_FILENO);
 }
-/*
-void	pipex(t_data *data, char *envp[])
-{
-	int	cmds;
-	int	i;
-	int	pid;
 
-	cmds = data->qnt_cmds;
+char	**parse_args(t_data *data, char *command)
+{
+	int	i;
+	char	**command_parsed;
+
 	i = 0;
-	while (cmds)
+	while (i < data->qnt_cmds)
 	{
-		if (i == 0)
-		{
-			data->pipe_ok = pipe(data->fd);
-			if (data->pipe_ok == -1)
-				handle_errors(2, data);
-		}
-		else if (data->qnt_cmds > 2 && i % 2 != 0)
-		{
-			data->pipe_ok = pipe(data->new_fd);
-			if (data->pipe_ok == -1)
-				handle_errors(2, data);
-		}
-		pid = fork();
-		if (pid == -1)
-			handle_errors(3, data);
-		if (pid == 0)
-			execute_commands(data, envp, i, cmds);
-		waitpid(pid, NULL, 0);
-		if (i == 0)
-			close(data->fd[1]);
-		else if (data->qnt_cmds > 2 && i % 2 != 0)
-			close(data->new_fd[1]);
-		cmds--;
+		if (treat_space(command))
+			command_parsed = ft_split(command, ';');
+		else
+			command_parsed = ft_split(command, ' ');
 		i++;
 	}
-	close(data->file_in);
-	close(data->file_out);
+	return (command_parsed);
 }
-
-static void	execute_commands(t_data *data, char *envp[], int i, int cmd)
-{
-	resolve_dups(data, cmd);
-	execve(data->file_path[i], data->args[i], envp);
-}
-
-static void	resolve_dups(t_data *data, int cmds)
-{
-	if (cmds == data->qnt_cmds && data->heredoc != 1)
-	{
-		dup2(data->file_in, STDIN_FILENO);
-		dup2(data->fd[1], STDOUT_FILENO);
-		write(2, "hey\n", 4);
-	}
-	else if (cmds == 1 || data->qnt_cmds == 2)
-	{
-		dup2(data->fd[0], STDIN_FILENO);
-		dup2(data->file_out, STDOUT_FILENO);
-		close(data->fd[1]);
-		write(2, "Lets go\n", 8);
-	}
-	else if (cmds == 1)
-	{
-		dup2(data->new_fd[0], STDIN_FILENO);
-		dup2(data->file_out, STDOUT_FILENO);
-		close(data->new_fd[1]);
-		write(2, "oo\n", 8);
-	}
-	else
-	{
-		dup2(data->fd[0], STDIN_FILENO);
-		dup2(data->new_fd[1], STDOUT_FILENO);
-		close(data->fd[0]);
-		write(2, "ho\n", 3);
-	}
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/17 17:19:13 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 19:59:40 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,32 +28,27 @@
 # define BUFFER_SIZE 1
 
 typedef struct s_data {
-	char	***args;
-	char	**cmds;
-	char	**file_path;
+	char	*file_path;
 	char	*file1;
 	char	*file2;
 	char	*limiter;
-	char	*str_gnl;
-	char	**env;
 	int		heredoc;
 	int		qnt_cmds;
 	int		file_ok;
-	int		pipe_ok;
 	int		fd[2];
 	int		file_in;
 	int		file_out;
+	pid_t	pid;
 }	t_data;
 
 void	handle_errors(int signal, t_data *data);
-void	pipex(t_data *data, char *envp[]);
+void	pipex(t_data *data, char *argv[], char *envp[]);
 void	free_matrix(char **matrix);
 void	free_exit(t_data *data);
-char	*file_found(char *command);
+char	*command_finder(char *command);
+char	**parse_args(t_data *data, char *command);
 int		treat_space(char *command);
 void	init_args(int argc, char *argv[], t_data *data);
-void	init_hdoc_args(char *argv[], t_data *data);
-void	init_multi_args(int argc, char *argv[], t_data *data);
 void	here_doc(t_data *data);
 
 char	*get_next_line(int fd);
