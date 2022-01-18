@@ -6,7 +6,7 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/01/18 19:13:26 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/01/18 21:33:50 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,10 +52,10 @@ SRC_BONUS = $(SRC_PATH_BONUS)pipex_utils_bonus.c \
 	$(SRC_PATH_BONUS)pipex_bonus.c \
 	$(SRC_PATH_BONUS)handle_errors_bonus.c \
 	$(SRC_PATH_BONUS)pipex_utils_bonus_2.c \
-	$(SRC_PATH_BONUS)treat_space_bonus.c \
 	$(SRC_PATH_BONUS)init_bonus.c \
 	$(SRC_PATH_BONUS)here_doc.c \
-	$(SRC_PATH_BONUS)command_finder.c
+	$(SRC_PATH_BONUS)command_finder.c \
+	$(SRC_PATH_BONUS)parse_argv.c
 OBJ_PATH_BONUS = ./objs_bonus/
 OBJ_BONUS = $(subst $(SRC_PATH_BONUS),$(OBJ_PATH_BONUS),$(SRC_BONUS:%.c=%.o))
 

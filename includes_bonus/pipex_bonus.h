@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/18 19:59:40 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 21:56:59 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,26 +41,20 @@ typedef struct s_data {
 	pid_t	pid;
 }	t_data;
 
+// ===== MAIN FUNCTIONS =====
 void	handle_errors(int signal, t_data *data);
 void	pipex(t_data *data, char *argv[], char *envp[]);
 void	free_matrix(char **matrix);
-void	free_exit(t_data *data);
-char	*command_finder(char *command);
-char	**parse_args(t_data *data, char *command);
-int		treat_space(char *command);
 void	init_args(int argc, char *argv[], t_data *data);
 void	here_doc(t_data *data);
-
+char	*command_finder(char *command);
+char	**parse_argv(t_data *data, char *command);
+// ===== LIBFT FUNCTIONS =====
 char	*get_next_line(int fd);
-void	ft_putendl_fd(char *s, int fd);
 char	*ft_strjoin(char *s1, char *s2);
 char	**ft_split(char *s, char c);
-size_t	ft_strlcpy(char *dest, char *src, size_t size);
 size_t	ft_strlen(const char *s);
 void	*ft_calloc(size_t nbr, size_t size);
 char	*ft_strnstr(const char *s1, const char *s2, size_t	n);
-char	*ft_strchr(const char *s, int c);
-char	*ft_strdup(const char *src);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif

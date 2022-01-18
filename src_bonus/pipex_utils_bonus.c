@@ -6,23 +6,14 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:17:32 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/03 18:49:08 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/18 21:32:44 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
 
 static int	str_in_array(char *s, char delimiter);
-
-void	ft_putendl_fd(char *s, int fd)
-{
-	while (*s != 0)
-	{
-		write (fd, s, 1);
-		s++;
-	}
-	write (fd, "\n", 1);
-}
+static size_t	ft_strlcpy(char *dest, char *src, size_t size);
 
 char	*ft_strjoin(char *s1, char *s2)
 {
@@ -49,7 +40,6 @@ char	*ft_strjoin(char *s1, char *s2)
 		s3[i + j] = s2[j];
 		j++;
 	}
-	// free(s1);
 	return (s3);
 }
 
@@ -99,4 +89,33 @@ static int	str_in_array(char *s, char delimiter)
 		}
 	}
 	return (qnt);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
+}
+
+static size_t	ft_strlcpy(char *dest, char *src, size_t size)
+{
+	size_t	src_len;
+	size_t	j;
+
+	src_len = ft_strlen(src);
+	j = 0;
+	if (size != 0)
+	{
+		while (j < size - 1 && j != src_len)
+		{
+			dest[j] = src[j];
+			j++;
+		}
+		dest[j] = 0;
+	}
+	return (src_len);
 }
