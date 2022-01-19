@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:37:24 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/19 18:03:45 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/19 20:36:25 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	here_doc(t_data *data)
 {
 	char	*line;
 
+	data->file_in = open("hdoc_file", O_RDWR | O_CREAT | O_APPEND, 0744);
 	line = get_next_line(STDIN_FILENO);
 	while (1)
 	{

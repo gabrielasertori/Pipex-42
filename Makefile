@@ -6,20 +6,24 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/01/19 00:21:38 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/01/19 20:52:51 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ./pipex
+
 SRC_PATH = ./src/
+
 SRC = $(SRC_PATH)pipex_utils.c \
 	$(SRC_PATH)pipex.c \
 	$(SRC_PATH)handle_errors.c \
 	$(SRC_PATH)pipex_utils_2.c \
 	$(SRC_PATH)treat_space.c
+
 OBJ_PATH = ./objs/
 OBJ = $(subst $(SRC_PATH),$(OBJ_PATH),$(SRC:%.c=%.o))
-CFLAGS = -Wall -Wextra -Werror -g
+
+CFLAGS = -Wall -Wextra -Werror -g3
 SUCCESS = @echo "\033[36m-----------\033[0m" && \
 	echo "\033[36m| SUCCESS |\033[0m" && \
 	echo "\033[36m-----------\033[0m"
