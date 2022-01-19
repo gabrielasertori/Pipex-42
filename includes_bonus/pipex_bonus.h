@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/18 22:07:49 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/19 22:07:04 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ char	*ft_strjoin(char *s1, char *s2);
 char	**ft_split(char *s, char c);
 char	*ft_strnstr(const char *s1, const char *s2, size_t	n);
 void	*ft_calloc(size_t nbr, size_t size);
+int	ft_strncmp(const char *s1, const char *s2, size_t size);
 size_t	ft_strlen(const char *s);
 
 #endif

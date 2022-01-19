@@ -6,7 +6,7 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/01/19 20:52:51 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/01/19 22:07:28 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -69,6 +69,7 @@ UTILS_BONUS = $(UTILS_PATH_BONUS)ft_calloc.c \
 	$(UTILS_PATH_BONUS)ft_strlen.c \
 	$(UTILS_PATH_BONUS)ft_substr.c \
 	$(UTILS_PATH_BONUS)ft_strnstr.c \
+	$(UTILS_PATH_BONUS)ft_strncmp.c \
 	$(UTILS_PATH_BONUS)gnl.c
 
 OBJ_PATH_BONUS = ./objs_bonus/
