@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:17:32 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/18 22:02:08 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/19 00:26:17 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
 
-static int	str_in_array(char *s, char delimiter);
+static int		str_in_array(char *s, char delimiter);
 static size_t	ft_strlcpy(char *dest, char *src, size_t size);
 
 char	**ft_split(char *s, char c)

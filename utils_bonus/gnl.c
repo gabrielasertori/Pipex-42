@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:55:00 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/18 22:03:26 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/19 00:26:03 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	ft_free(char **ptr)
 static char	*format_line(char **buffer, char *swap, int new_line_index)
 {
 	char	*line_formated;
-
 
 	if (new_line_index < 0)
 	{

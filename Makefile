@@ -6,7 +6,7 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/01/19 00:17:41 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/01/19 00:21:38 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,6 @@ OBJ_UTILS_BONUS = $(subst $(UTILS_PATH_BONUS),$(OBJ_UTILS_PATH_BONUS),$(UTILS_BO
 
 
 $(OBJ_PATH_BONUS)%.o: $(SRC_PATH_BONUS)%.c
-	echo "huraai"
 	mkdir -p objs_bonus
 	gcc $(CFLAGS) -c $< -o $@
 
@@ -90,11 +89,13 @@ $(NAME_BONUS): $(OBJ_SRC_BONUS) $(OBJ_UTILS_BONUS)
 	$(SUCCESS)
 
 b_clean:
-	rm -f $(OBJ_BONUS)
+	rm -f $(OBJ_SRC_BONUS)
+	rm -f $(OBJ_UTILS_BONUS)
 	$(SUCCESS)
 
 b_fclean: b_clean
 	rm -rf $(OBJ_PATH_BONUS)
+	rm -rf $(OBJ_UTILS_PATH_BONUS)
 	rm -f $(NAME_BONUS)
 	$(SUCCESS)
 

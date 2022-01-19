@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:24:01 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/18 21:53:44 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/19 00:26:48 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	treat_space(char *command);
 
 char	**parse_argv(t_data *data, char *command)
 {
-	int	i;
+	int		i;
 	char	**command_parsed;
 
 	i = 0;
