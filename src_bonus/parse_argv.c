@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:24:01 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/19 00:26:48 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/20 01:22:24 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,14 @@
 
 static int	treat_space(char *command);
 
-char	**parse_argv(t_data *data, char *command)
+char	**parse_argv(char *command)
 {
-	int		i;
 	char	**command_parsed;
 
-	i = 0;
-	while (i < data->qnt_cmds)
-	{
-		if (treat_space(command))
-			command_parsed = ft_split(command, ';');
-		else
-			command_parsed = ft_split(command, ' ');
-		i++;
-	}
+	if (treat_space(command))
+		command_parsed = ft_split(command, ';');
+	else
+		command_parsed = ft_split(command, ' ');
 	return (command_parsed);
 }
 
@@ -45,7 +39,7 @@ static int	treat_space(char *command)
 		{
 			if (command[i] == ' ')
 				command[i] = ';';
-			else if (command[i] == '\'')
+			else if (command[i] == '\'' && command[i + 1] == ' ')
 			{
 				command[i] = ';';
 				i++;

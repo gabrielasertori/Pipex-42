@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/19 22:04:41 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/20 01:05:06 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ static void	exec_commands(t_data *data, int index, char *argv[], char *envp[])
 
 	close(data->fd[0]);
 	if (data->heredoc == 1)
-		command_parsed = parse_argv(data, argv[index + 3]);
+		command_parsed = parse_argv(argv[index + 3]);
 	else
-		command_parsed = parse_argv(data, argv[index + 2]);
+		command_parsed = parse_argv(argv[index + 2]);
 	data->file_path = command_finder(command_parsed[0]);
 	if (data->file_path == NULL)
 		handle_errors(4, data);
