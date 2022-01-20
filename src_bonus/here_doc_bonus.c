@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   here_doc.c                                         :+:      :+:    :+:   */
+/*   here_doc_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:37:24 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/19 22:16:11 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/20 19:02:12 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,16 @@ void	here_doc(t_data *data)
 	line = get_next_line(STDIN_FILENO);
 	while (1)
 	{
-		if (ft_strncmp(line, data->limiter, ft_strlen(line) - 1))
+		if (ft_strncmp(line, data->limiter, ft_strlen(data->limiter))
+			&& ft_strlen(data->limiter) == ft_strlen(line) - 1)
 		{
+			free(line);
 			close(temp_hdoc);
 			data->file_in = open("hdoc_file", O_RDONLY);
 			break ;
 		}
 		write(temp_hdoc, line, ft_strlen(line));
+		free(line);
 		line = get_next_line(STDIN_FILENO);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/20 16:06:05 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:14:50 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	handle_errors(int signal, t_data *data);
 void	pipex(t_data *data, char *argv[], char *envp[]);
 void	init_args(int argc, char *argv[], t_data *data);
 void	here_doc(t_data *data);
+void	free_matrix(char **matrix);
 char	*command_finder(char *command);
 char	**parse_argv(char *command);
 // ===== LIBFT FUNCTIONS =====
