@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:57:10 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/19 17:36:59 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:40:26 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,20 @@ static void	close_remain_fds(t_data *data);
 void	handle_errors(int signal, t_data *data)
 {
 	close_remain_fds(data);
-	if (signal == 0)
-		write(2, "\e[0;31mInvalid number of arguments\e[0m\n", 39);
+	if (signal == 0 || signal == 4)
+		errno = EINVAL;
 	else if (signal == 1)
-		write(2, "\e[0;31mNot a valid file\e[0m\n", 28);
+		errno = ENOENT;
 	else if (signal == 2)
-		write(2, "\e[0;31mPipe doesn't work\e[0m\n", 29);
+		errno = EPIPE;
 	else if (signal == 3)
-		write(2, "\e[0;31mFork doesn't work\e[0m\n", 29);
-	else if (signal == 4)
-		write(2, "\e[0;31mCommand doesn't found\e[0m\n", 33);
+		errno = ESRCH;
 	else if (signal == 5)
-		write(2, "\e[0;31mMalloc failed\e[0m\n", 25);
+		errno = ENOMEM;
 	else if (signal == 6)
-		write(2, "\e[0;31mExecve failed\e[0m\n", 25);
-	exit(0);
+		errno = ENOEXEC;
+	perror("ERROR");
+	exit(EXIT_FAILURE);
 }
 
 static void	close_remain_fds(t_data *data)
@@ -44,18 +43,4 @@ static void	close_remain_fds(t_data *data)
 		close(data->fd[0]);
 	if (data->fd[1])
 		close(data->fd[1]);
-}
-
-void	free_matrix(char **matrix)
-{
-	int	i;
-
-	i = 0;
-	while (matrix[i])
-	{
-		free(matrix[i]);
-		i++;
-	}
-	free(matrix);
-	matrix = NULL;
 }

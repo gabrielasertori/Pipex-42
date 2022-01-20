@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:05:58 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/19 20:37:34 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/20 15:32:12 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ int	main(int argc, char *argv[], char *envp[])
 		handle_errors(0, &data);
 	else
 		init_args(argc, argv, &data);
-	if (open_files(&data) == -1)
-		handle_errors(1, &data);
+	open_files(&data);
 	pipex(&data, argv, envp);
 	exit(0);
 }
@@ -41,6 +40,6 @@ static int	open_files(t_data *data)
 		data->file_out = open(data->file2, O_WRONLY | O_CREAT | O_TRUNC, 0744);
 	}
 	if (data->file_out == -1 || data->file_in == -1)
-		return (-1);
+		handle_errors(1, data);
 	return (0);
 }

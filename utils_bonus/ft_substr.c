@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 22:04:10 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/18 22:04:34 by gcosta-d         ###   ########.fr       */
+/*   Created: 2022/01/20 16:01:30 by gcosta-d          #+#    #+#             */
+/*   Updated: 2022/01/20 16:02:26 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,23 @@
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	size_t	string_len;
-	size_t	i;
-	char	*substr;
+	size_t			s_len;
+	char			*copy;
 
-	if (s == NULL)
-		return (NULL);
-	string_len = ft_strlen(s);
-	if (start > string_len)
+	s_len = ft_strlen(s);
+	if (start > s_len || len <= 0)
 		return (ft_strdup(""));
-	if (start + len > string_len)
-		len = string_len - start;
-	substr = malloc((len + 1) * sizeof(char));
-	if (substr == NULL)
-		return (NULL);
-	i = 0;
-	while (s[start + i] && i < len)
+	if ((start + len) > s_len)
 	{
-		substr[i] = s[start + i];
-		i++;
+		copy = (char *) ft_calloc(s_len - start + 1, sizeof(char));
+		if (!copy)
+			return (NULL);
+		ft_strlcpy(copy, s + start, s_len - start + 1);
+		return (copy);
 	}
-	substr[i] = '\0';
-	return (substr);
+	copy = (char *) ft_calloc(len + 1, sizeof(char));
+	if (!copy)
+		return (NULL);
+	ft_strlcpy(copy, s + start, len + 1);
+	return (copy);
 }

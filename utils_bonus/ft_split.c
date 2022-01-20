@@ -6,14 +6,13 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:17:32 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/19 00:26:17 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/20 16:06:46 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
 
 static int		str_in_array(char *s, char delimiter);
-static size_t	ft_strlcpy(char *dest, char *src, size_t size);
 
 char	**ft_split(char *s, char c)
 {
@@ -61,23 +60,4 @@ static int	str_in_array(char *s, char delimiter)
 		}
 	}
 	return (qnt);
-}
-
-static size_t	ft_strlcpy(char *dest, char *src, size_t size)
-{
-	size_t	src_len;
-	size_t	j;
-
-	src_len = ft_strlen(src);
-	j = 0;
-	if (size != 0)
-	{
-		while (j < size - 1 && j != src_len)
-		{
-			dest[j] = src[j];
-			j++;
-		}
-		dest[j] = 0;
-	}
-	return (src_len);
 }

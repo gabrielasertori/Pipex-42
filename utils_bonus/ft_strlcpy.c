@@ -1,36 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command_finder.c                                   :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/18 18:26:43 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/18 21:54:27 by gcosta-d         ###   ########.fr       */
+/*   Created: 2022/01/20 16:04:44 by gcosta-d          #+#    #+#             */
+/*   Updated: 2022/01/20 16:05:29 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
 
-char	*command_finder(char *command)
+size_t	ft_strlcpy(char *dest, const char *src, size_t size)
 {
-	char	**paths;
-	char	*command_path;
-	int		i;
+	size_t	src_len;
+	size_t	j;
 
-	i = 0;
-	paths = ft_split(VALID_PATHS, ':');
-	while (paths[i])
+	src_len = ft_strlen(src);
+	j = 0;
+	if (size != 0)
 	{
-		command_path = ft_strjoin(paths[i], command);
-		if (!access(command_path, F_OK))
+		while (j < size - 1 && j != src_len)
 		{
-			free_matrix(paths);
-			return (command_path);
+			dest[j] = src[j];
+			j++;
 		}
-		free(command_path);
-		i++;
+		dest[j] = 0;
 	}
-	free_matrix(paths);
-	return (NULL);
+	return (src_len);
 }

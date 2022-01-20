@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strchr.c                                        :+:      :+:    :+:   */
+/*   command_finder_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/20 16:02:48 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/20 16:03:31 by gcosta-d         ###   ########.fr       */
+/*   Created: 2022/01/18 18:26:43 by gcosta-d          #+#    #+#             */
+/*   Updated: 2022/01/20 14:40:18 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
 
-char	*ft_strchr(const char *s, int c)
+char	*command_finder(char *command)
 {
-	int	s_len;
+	char	**paths;
+	char	*command_path;
+	int		i;
 
-	s_len = ft_strlen(s);
-	while (s_len >= 0)
+	i = 0;
+	paths = ft_split(VALID_PATHS, ':');
+	while (paths[i])
 	{
-		if (s[s_len] == (char)c)
-			return ((char *)&s[s_len]);
-		s_len--;
+		command_path = ft_strjoin(paths[i], command);
+		if (!access(command_path, F_OK))
+			return (command_path);
+		i++;
 	}
 	return (NULL);
 }

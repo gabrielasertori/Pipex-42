@@ -6,7 +6,7 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/01/19 22:07:28 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/01/20 16:05:50 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRC = $(SRC_PATH)pipex_utils.c \
 OBJ_PATH = ./objs/
 OBJ = $(subst $(SRC_PATH),$(OBJ_PATH),$(SRC:%.c=%.o))
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address
 SUCCESS = @echo "\033[36m-----------\033[0m" && \
 	echo "\033[36m| SUCCESS |\033[0m" && \
 	echo "\033[36m-----------\033[0m"
@@ -56,9 +56,9 @@ SRC_PATH_BONUS = ./src_bonus/
 SRC_BONUS = $(SRC_PATH_BONUS)pipex_bonus.c \
 	$(SRC_PATH_BONUS)handle_errors_bonus.c \
 	$(SRC_PATH_BONUS)init_bonus.c \
-	$(SRC_PATH_BONUS)here_doc.c \
-	$(SRC_PATH_BONUS)command_finder.c \
-	$(SRC_PATH_BONUS)parse_argv.c
+	$(SRC_PATH_BONUS)here_doc_bonus.c \
+	$(SRC_PATH_BONUS)command_finder_bonus.c \
+	$(SRC_PATH_BONUS)parse_argv_bonus.c
 
 UTILS_PATH_BONUS = ./utils_bonus/
 UTILS_BONUS = $(UTILS_PATH_BONUS)ft_calloc.c \
@@ -70,6 +70,7 @@ UTILS_BONUS = $(UTILS_PATH_BONUS)ft_calloc.c \
 	$(UTILS_PATH_BONUS)ft_substr.c \
 	$(UTILS_PATH_BONUS)ft_strnstr.c \
 	$(UTILS_PATH_BONUS)ft_strncmp.c \
+	$(UTILS_PATH_BONUS)ft_strlcpy.c \
 	$(UTILS_PATH_BONUS)gnl.c
 
 OBJ_PATH_BONUS = ./objs_bonus/
@@ -90,7 +91,7 @@ $(OBJ_UTILS_PATH_BONUS)%.o: $(UTILS_PATH_BONUS)%.c
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJ_SRC_BONUS) $(OBJ_UTILS_BONUS)
-	gcc $(CFLAGS) -o $(NAME_BONUS) ./src_bonus/main_bonus.c $(OBJ_SRC_BONUS) $(OBJ_UTILS_BONUS) -I./includes_bonus
+	gcc $(CFLAGS) -o $(NAME_BONUS) ./src_bonus/main_bonus.c $(OBJ_SRC_BONUS) $(OBJ_UTILS_BONUS) -I./includes_bonus -fsanitize=address
 	$(SUCCESS)
 
 b_clean:
