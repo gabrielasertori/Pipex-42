@@ -6,11 +6,11 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/10 01:28:56 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/10 03:35:01 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes_bonus/pipex_bonus.h"
+#include "../includes/pipex.h"
 
 static void	exec_commands(t_data *data, int index, char *argv[], char *envp[]);
 static void	resolve_dups(t_data *data, int index);
@@ -39,10 +39,10 @@ static void	generate_pipe(t_data *data, char *argv[], char *envp[])
 			close(data->fd[0]);
 		}
 		if (pipe(data->fd) == -1)
-			handle_errors(2, data);
+			handle_errors(2);
 		data->pid = fork();
 		if (data->pid == -1)
-			handle_errors(3, data);
+			handle_errors(3);
 		if (data->pid == 0)
 			exec_commands(data, index, argv, envp);
 		else
@@ -58,13 +58,13 @@ static void	exec_commands(t_data *data, int index, char *argv[], char *envp[])
 {
 	char	**command_parsed;
 
-	command_parsed = parse_argv(argv[index + 2]);
+	command_parsed = parse_argv(data, argv[index + 2]);
 	data->file_path = command_finder(command_parsed[0]);
 	if (data->file_path == NULL)
-		handle_errors(4, data);
+		handle_errors(4);
 	resolve_dups(data, index);
 	if (execve(data->file_path, command_parsed, envp) == -1)
-		handle_errors(6, data);
+		handle_errors(6);
 }
 
 static void	resolve_dups(t_data *data, int index)
