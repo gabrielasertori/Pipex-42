@@ -6,15 +6,13 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:57:10 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/10 01:38:45 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/10 03:33:47 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes_bonus/pipex_bonus.h"
+#include "../includes/pipex.h"
 
-static void	close_remain_fds(t_data *data);
-
-void	handle_errors(int signal, t_data *data)
+void	handle_errors(int signal)
 {
 	if (signal == 0 || signal == 4)
 		errno = EINVAL;
