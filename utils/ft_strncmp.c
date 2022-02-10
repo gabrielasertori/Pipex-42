@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_bonus.c                                       :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/03 18:39:22 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/09 23:40:14 by gcosta-d         ###   ########.fr       */
+/*   Created: 2022/01/19 22:06:33 by gcosta-d          #+#    #+#             */
+/*   Updated: 2022/01/20 01:21:18 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
 
-void	init_args(int argc, char *argv[], t_data *data)
+int	ft_strncmp(const char *s1, const char *s2, size_t size)
 {
-	data->qnt_cmds = argc - 3;
-	data->file2 = argv[argc - 1];
-	data->file1 = argv[1];
-	data->heredoc = 0;
-	if (argc >= 6 && ft_strncmp(argv[1], "here_doc", 8))
+	size_t	i;
+
+	i = 0;
+	while (i < size && (s1[i] != '\0' || s2[i] != '\0'))
 	{
-		data->heredoc = 1;
-		data->limiter = argv[2];
-		data->qnt_cmds = argc - 4;
+		if (s1[i] != s2[i])
+			return (0);
+		i++;
 	}
+	return (1);
 }

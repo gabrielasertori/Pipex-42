@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_bonus.c                                       :+:      :+:    :+:   */
+/*   command_finder_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/03 18:39:22 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/09 23:40:14 by gcosta-d         ###   ########.fr       */
+/*   Created: 2022/01/18 18:26:43 by gcosta-d          #+#    #+#             */
+/*   Updated: 2022/01/20 16:12:31 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
 
-void	init_args(int argc, char *argv[], t_data *data)
+char	*command_finder(char *command)
 {
-	data->qnt_cmds = argc - 3;
-	data->file2 = argv[argc - 1];
-	data->file1 = argv[1];
-	data->heredoc = 0;
-	if (argc >= 6 && ft_strncmp(argv[1], "here_doc", 8))
+	char	**paths;
+	char	*command_path;
+	int		i;
+
+	i = 0;
+	paths = ft_split(VALID_PATHS, ':');
+	while (paths[i])
 	{
-		data->heredoc = 1;
-		data->limiter = argv[2];
-		data->qnt_cmds = argc - 4;
+		command_path = ft_strjoin(paths[i], command);
+		if (!access(command_path, F_OK))
+		{
+			free_matrix(paths);
+			return (command_path);
+		}
+		i++;
+		free(command_path);
 	}
+	free_matrix(paths);
+	return (NULL);
 }

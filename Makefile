@@ -6,7 +6,7 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/01/20 18:56:39 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/01/20 19:52:32 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,11 @@ NAME = ./pipex
 
 SRC_PATH = ./src/
 
-SRC = $(SRC_PATH)pipex_utils.c \
-	$(SRC_PATH)pipex.c \
-	$(SRC_PATH)handle_errors.c \
-	$(SRC_PATH)pipex_utils_2.c \
-	$(SRC_PATH)treat_space.c
+SRC = $(SRC_PATH)pipex.c \
+	$(SRC_PATH)parse_argv.c \
+	$(SRC_PATH)init.c \
+	$(SRC_PATH)command_finder.c \
+	$(SRC_PATH)handle_errors.c
 
 OBJ_PATH = ./objs/
 OBJ = $(subst $(SRC_PATH),$(OBJ_PATH),$(SRC:%.c=%.o))

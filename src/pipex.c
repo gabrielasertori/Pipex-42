@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/20 19:26:09 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/10 01:28:56 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	pipex(t_data *data, char *argv[], char *envp[])
 	close(data->file_out);
 	close(data->fd[0]);
 	close(data->fd[1]);
-	unlink("hdoc_file");
 }
 
 static void	generate_pipe(t_data *data, char *argv[], char *envp[])
@@ -32,7 +31,7 @@ static void	generate_pipe(t_data *data, char *argv[], char *envp[])
 	int	index;
 
 	index = 0;
-	while (index < data->qnt_cmds)
+	while (index < 2)
 	{
 		if (index > 0)
 		{
@@ -53,18 +52,13 @@ static void	generate_pipe(t_data *data, char *argv[], char *envp[])
 			index++;
 		}
 	}
-	close(data->file_out);
 }
 
 static void	exec_commands(t_data *data, int index, char *argv[], char *envp[])
 {
 	char	**command_parsed;
 
-	close(data->fd[0]);
-	if (data->heredoc == 1)
-		command_parsed = parse_argv(argv[index + 3]);
-	else
-		command_parsed = parse_argv(argv[index + 2]);
+	command_parsed = parse_argv(argv[index + 2]);
 	data->file_path = command_finder(command_parsed[0]);
 	if (data->file_path == NULL)
 		handle_errors(4, data);
@@ -75,7 +69,7 @@ static void	exec_commands(t_data *data, int index, char *argv[], char *envp[])
 
 static void	resolve_dups(t_data *data, int index)
 {
-	if (index == data->qnt_cmds - 1)
+	if (index == 1)
 		dup2(data->file_out, STDOUT_FILENO);
 	else
 		dup2(data->fd[1], STDOUT_FILENO);

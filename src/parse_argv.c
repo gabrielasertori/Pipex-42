@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_argv_bonus.c                                 :+:      :+:    :+:   */
+/*   parse_argv.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:24:01 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/10 01:40:03 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/01/20 01:22:24 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ static int	treat_space(char *command)
 		is_space = 1;
 		while (command[i] != '\0')
 		{
-			if (command[i] == ' ' || (command[i] == '\''
-					&& command[i + 1] == '\0'))
+			if (command[i] == ' ')
 				command[i] = ';';
 			else if (command[i] == '\'' && command[i + 1] == ' ')
 			{

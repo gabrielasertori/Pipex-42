@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_bonus.c                                       :+:      :+:    :+:   */
+/*   pipex_utils_bonus_2.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/03 18:39:22 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/09 23:40:14 by gcosta-d         ###   ########.fr       */
+/*   Created: 2021/12/22 03:55:18 by gcosta-d          #+#    #+#             */
+/*   Updated: 2022/01/18 22:03:00 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
 
-void	init_args(int argc, char *argv[], t_data *data)
+char	*ft_strnstr(const char *s1, const char *s2, size_t	n)
 {
-	data->qnt_cmds = argc - 3;
-	data->file2 = argv[argc - 1];
-	data->file1 = argv[1];
-	data->heredoc = 0;
-	if (argc >= 6 && ft_strncmp(argv[1], "here_doc", 8))
+	size_t	i;
+	size_t	j;
+	size_t	s2_len;
+
+	i = 0;
+	s2_len = ft_strlen(s2);
+	if (!s2_len)
+		return ((char *)s1);
+	if (n != 0)
 	{
-		data->heredoc = 1;
-		data->limiter = argv[2];
-		data->qnt_cmds = argc - 4;
+		while (s1[i] && i <= n - s2_len)
+		{
+			j = 0;
+			while (s2[j] && s2[j] == s1[i + j])
+				j++;
+			if (j == s2_len)
+				return ((char *)&s1[i]);
+			i++;
+		}
 	}
+	return (NULL);
 }
