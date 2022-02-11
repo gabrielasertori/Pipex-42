@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/20 16:14:50 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/11 01:14:07 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,16 @@
 /:/sbin/:/bin/:/usr/games/:/usr/local/games/:/snap/bin/"
 # define MAX_FD 256
 # define BUFFER_SIZE 1
+# define SPACE ' '
+# define SEMICOLON ';'
+# define HASH '#'
 
 typedef struct s_data {
 	char	*file_path;
 	char	*file1;
 	char	*file2;
 	char	*limiter;
+	char	*operand;
 	int		heredoc;
 	int		qnt_cmds;
 	int		fd[2];
@@ -47,7 +51,8 @@ void	init_args(int argc, char *argv[], t_data *data);
 void	here_doc(t_data *data);
 void	free_matrix(char **matrix);
 char	*command_finder(char *command);
-char	**parse_argv(char *command);
+char	**parse_argv(t_data *data, char *command);
+
 // ===== LIBFT FUNCTIONS =====
 char	*get_next_line(int fd);
 char	*ft_strdup(const char *src);
