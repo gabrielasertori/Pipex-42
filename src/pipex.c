@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/10 03:35:01 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/11 03:11:33 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,13 @@ static void	exec_commands(t_data *data, int index, char *argv[], char *envp[])
 static void	resolve_dups(t_data *data, int index)
 {
 	if (index == 1)
+	{
 		dup2(data->file_out, STDOUT_FILENO);
+		close(data->file_out);
+	}
 	else
+	{
 		dup2(data->fd[1], STDOUT_FILENO);
+		close(data->fd[1]);
+	}
 }
