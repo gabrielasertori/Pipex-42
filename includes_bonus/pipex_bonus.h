@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:06:34 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/11 01:14:07 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/11 03:17:16 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ typedef struct s_data {
 	char	*file1;
 	char	*file2;
 	char	*limiter;
-	char	*operand;
+	char	operand;
 	int		heredoc;
 	int		qnt_cmds;
 	int		fd[2];
