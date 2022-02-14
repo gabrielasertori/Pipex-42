@@ -6,24 +6,35 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/01/20 19:52:32 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/02/10 02:27:01 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ./pipex
 
 SRC_PATH = ./src/
-
 SRC = $(SRC_PATH)pipex.c \
 	$(SRC_PATH)parse_argv.c \
 	$(SRC_PATH)init.c \
 	$(SRC_PATH)command_finder.c \
 	$(SRC_PATH)handle_errors.c
 
+UTILS_PATH = ./utils/
+UTILS = $(UTILS_PATH)ft_split.c \
+		$(UTILS_PATH)ft_strdup.c \
+		$(UTILS_PATH)ft_strjoin.c \
+		$(UTILS_PATH)ft_strlen.c \
+		$(UTILS_PATH)ft_strnstr.c \
+		$(UTILS_PATH)ft_calloc.c \
+		$(UTILS_PATH)ft_strlcpy.c
+
 OBJ_PATH = ./objs/
 OBJ = $(subst $(SRC_PATH),$(OBJ_PATH),$(SRC:%.c=%.o))
 
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+OBJ_PATH_UTILS = ./objs_utils/
+OBJ_UTILS = $(subst $(UTILS_PATH),$(OBJ_PATH_UTILS),$(UTILS:%.c=%.o))
+
+CFLAGS = -Wall -Wextra -Werror -g3
 SUCCESS = @echo "\033[36m-----------\033[0m" && \
 	echo "\033[36m| SUCCESS |\033[0m" && \
 	echo "\033[36m-----------\033[0m"
@@ -32,18 +43,24 @@ $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	mkdir -p objs
 	gcc $(CFLAGS) -c $< -o $@
 
+$(OBJ_PATH_UTILS)%.o: $(UTILS_PATH)%.c
+	mkdir -p objs_utils
+	gcc $(CFLAGS) -c $< -o $@
+
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	gcc $(CFLAGS) -o $(NAME) ./src/main.c $(OBJ) -I./includes
+$(NAME): $(OBJ) $(OBJ_UTILS)
+	gcc $(CFLAGS) -o $(NAME) ./src/main.c $(OBJ) $(OBJ_UTILS) -I./includes
 	$(SUCCESS)
 
 clean:
 	rm -f $(OBJ)
+	rm -f $(OBJ_UTILS)
 	$(SUCCESS)
 
 fclean: clean
 	rm -rf $(OBJ_PATH)
+	rm -rf $(OBJ_PATH_UTILS)
 	rm -f $(NAME)
 	$(SUCCESS)
 
