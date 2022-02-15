@@ -6,11 +6,13 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:26:43 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/20 16:12:31 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/15 02:15:27 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes_bonus/pipex_bonus.h"
+
+static int	is_path_bin(char *command);
 
 char	*command_finder(char *command)
 {
@@ -33,4 +35,15 @@ char	*command_finder(char *command)
 	}
 	free_matrix(paths);
 	return (NULL);
+}
+
+static int	is_path_bin(char *command)
+{
+	int	is_path;
+
+	is_path = 0;
+	if (!access(command, F_OK))
+		is_path = 1;
+
+	return (is_path);
 }
