@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/11 03:11:33 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/15 01:56:54 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	pipex(t_data *data, char *argv[], char *envp[])
 static void	generate_pipe(t_data *data, char *argv[], char *envp[])
 {
 	int	index;
+	int	status;
 
 	index = 0;
 	while (index < 2)
@@ -47,7 +48,7 @@ static void	generate_pipe(t_data *data, char *argv[], char *envp[])
 			exec_commands(data, index, argv, envp);
 		else
 		{
-			waitpid(data->pid, NULL, 0);
+			waitpid(data->pid, &status, 0);
 			close(data->fd[1]);
 			index++;
 		}
