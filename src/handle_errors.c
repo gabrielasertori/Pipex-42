@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:57:10 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/11 03:08:12 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/15 02:37:53 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	handle_errors(int signal)
 {
-	if (signal == 0 || signal == 4)
+	if (signal == 0)
 		errno = EINVAL;
 	else if (signal == 1)
 		errno = ENOENT;
@@ -22,6 +22,11 @@ void	handle_errors(int signal)
 		errno = EPIPE;
 	else if (signal == 3)
 		errno = ESRCH;
+	else if (signal == 4)
+	{
+		perror("command not found");
+		exit(127);
+	}
 	else if (signal == 5)
 		errno = ENOMEM;
 	else if (signal == 6)
