@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/15 01:56:54 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/15 03:16:25 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,18 @@ static void	exec_commands(t_data *data, int index, char *argv[], char *envp[])
 	command_parsed = parse_argv(data, argv[index + 2]);
 	data->file_path = command_finder(command_parsed[0]);
 	if (data->file_path == NULL)
+	{
+		free_matrix(command_parsed);
+		free(data->file_path);
 		handle_errors(4);
+	}
 	resolve_dups(data, index);
 	if (execve(data->file_path, command_parsed, envp) == -1)
+	{
+		free_matrix(command_parsed);
+		free(data->file_path);
 		handle_errors(6);
+	}
 }
 
 static void	resolve_dups(t_data *data, int index)
