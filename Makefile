@@ -6,7 +6,7 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/02/10 02:27:01 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/02/17 04:13:41 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,12 +21,14 @@ SRC = $(SRC_PATH)pipex.c \
 
 UTILS_PATH = ./utils/
 UTILS = $(UTILS_PATH)ft_split.c \
+		$(UTILS_PATH)ft_strchr.c \
 		$(UTILS_PATH)ft_strdup.c \
 		$(UTILS_PATH)ft_strjoin.c \
 		$(UTILS_PATH)ft_strlen.c \
 		$(UTILS_PATH)ft_strnstr.c \
 		$(UTILS_PATH)ft_calloc.c \
-		$(UTILS_PATH)ft_strlcpy.c
+		$(UTILS_PATH)ft_strlcpy.c \
+		$(UTILS_PATH)ft_substr.c
 
 OBJ_PATH = ./objs/
 OBJ = $(subst $(SRC_PATH),$(OBJ_PATH),$(SRC:%.c=%.o))

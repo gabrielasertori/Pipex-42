@@ -1,8 +1,12 @@
 objs/
 objs_bonus/
+objs_utils/
 pipex
 pipex_bonus
 file2
 pipex-tester/
 pipexMedic/
 PipexTester/
+.vscode/
+vgcore
+pipexTeeste/

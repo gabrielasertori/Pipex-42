@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 18:26:43 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/15 02:15:23 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/17 01:28:08 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ static int	is_path_bin(char *command)
 	is_path = 0;
 	if (!access(command, F_OK))
 		is_path = 1;
-
 	return (is_path);
 }

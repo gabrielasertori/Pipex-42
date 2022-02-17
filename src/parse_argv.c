@@ -6,59 +6,84 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:24:01 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/10 03:32:28 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/17 04:53:54 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/pipex.h"
 
-static void	change_char(t_data *data, char *command);
-static int	treat_space(t_data *data, char *command);
+static void		treat_space(t_data *data, char *command);
+static size_t	strchr_qnt(char *command, char c);
+static int		strichar(char *command, int pos, char c);
+static char		*change_bytes(char *command, int start, int end, char c);
 
-char	**parse_argv(t_data *data, char *command)
+void	parse_argv(t_data *data, char *command)
 {
-	char	**command_parsed;
-
-	if (treat_space(data, command))
-		command_parsed = ft_split(command, data->operand);
+	if (strchr_qnt(command, SINGLE_QUOTE) > 1)
+		treat_space(data, command);
 	else
-		command_parsed = ft_split(command, ' ');
-	return (command_parsed);
+		data->cmd_parsed = ft_split(command, ' ');
 }
 
-static int	treat_space(t_data *data, char *command)
+static void	treat_space(t_data *data, char *command)
 {
-	int		is_space;
+	char	*cmd_changed;
+	char	*substr;
+	int		first_char;
+	int		sec_char;
 	int		i;
 
-	is_space = 0;
-	i = 0;
-	if (ft_strnstr(command, "' ", ft_strlen(command)))
+	first_char = strichar(command, 0, SINGLE_QUOTE);
+	sec_char = strichar(command, first_char + 1, SINGLE_QUOTE);
+	substr = ft_substr(command, first_char + 1, sec_char - first_char - 1);
+	cmd_changed = change_bytes(command, first_char, sec_char, PERCENT);
+	data->cmd_parsed = ft_split(cmd_changed, SPACE);
+	free(cmd_changed);
+	i = -1;
+	while (data->cmd_parsed[++i])
 	{
-		change_char(data, command);
-		is_space = 1;
-		while (command[i])
+		if (strchr_qnt(data->cmd_parsed[i], PERCENT) == \
+			ft_strlen(data->cmd_parsed[i]))
 		{
-			if (command[i] == SPACE)
-				command[i] = data->operand;
-			else if (command[i] == '\'' && command[i + 1] == SPACE)
-			{
-				command[i] = data->operand;
-				i++;
-				while (command[i] == SPACE)
-					i++;
-				command[i] = data->operand;
-			}
-			i++;
+			free(data->cmd_parsed[i]);
+			data->cmd_parsed[i] = ft_strdup(substr);
+			free(substr);
 		}
 	}
-	return (is_space);
 }
 
-static void	change_char(t_data *data, char *command)
+static size_t	strchr_qnt(char *command, char c)
 {
-	if (ft_strnstr(command, ";", ft_strlen(command)))
-		data->operand = HASH;
-	else
-		data->operand = SEMICOLON;
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (command[i])
+	{
+		if (command[i] == c)
+			j++;
+		i++;
+	}
+	return (j);
+}
+
+static int	strichar(char *command, int pos, char c)
+{
+	while (command[pos] != c)
+		pos++;
+	return (pos);
+}
+
+static char	*change_bytes(char *command, int start, int end, char c)
+{
+	char	*cmd;
+
+	cmd = ft_strdup(command);
+	while (start <= end)
+	{
+		cmd[start] = c;
+		start++;
+	}
+	return (cmd);
 }

@@ -6,11 +6,11 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 22:00:26 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/18 22:01:08 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/17 01:20:46 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes_bonus/pipex_bonus.h"
+#include "../includes/pipex.h"
 
 size_t	ft_strlen(const char *s)
 {
