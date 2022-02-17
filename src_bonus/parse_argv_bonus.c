@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 21:24:01 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/17 04:55:49 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/17 23:29:02 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	parse_argv(t_data *data, char *command)
 	if (strchr_qnt(command, SINGLE_QUOTE) > 1)
 		treat_space(data, command);
 	else
-		data->cmd_parsed = ft_split(command, ' ');
+		data->cmd_parsed = ft_split(command, SPACE);
 }
 
 static void	treat_space(t_data *data, char *command)
