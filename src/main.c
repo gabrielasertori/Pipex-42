@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 21:05:58 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/17 01:32:25 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/17 23:35:29 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_data	data;
 	int		status;
 
-	if (argc < 5)
+	if (argc != 5)
 		handle_errors(0);
 	init_args(argc, argv, &data);
 	open_files(&data);
