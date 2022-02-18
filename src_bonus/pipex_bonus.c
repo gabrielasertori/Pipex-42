@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/22 02:51:14 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/02/17 05:02:34 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/18 01:10:27 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static int	generate_pipe(t_data *data, char *argv[], char *envp[])
 
 static void	exec_commands(t_data *data, int index, char *argv[], char *envp[])
 {
-	close(data->fd[0]);
 	if (data->heredoc == 1)
 		parse_argv(data, argv[index + 3]);
 	else
