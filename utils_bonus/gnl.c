@@ -6,7 +6,7 @@
 /*   By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/04 13:55:00 by gcosta-d          #+#    #+#             */
-/*   Updated: 2022/01/19 00:26:03 by gcosta-d         ###   ########.fr       */
+/*   Updated: 2022/02/18 00:09:23 by gcosta-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ static char	*format_line(char **buffer, char *swap, int new_line_index)
 	*buffer = ft_substr(swap, new_line_index + 1, ft_strlen(swap));
 	swap[new_line_index + 1] = '\0';
 	line_formated = swap;
-	swap = NULL;
 	return (line_formated);
 }
 
@@ -88,5 +87,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = get_line(fd, &buffer[fd], read_buffer);
 	ft_free(&read_buffer);
+	ft_free(buffer);
 	return (line);
 }
