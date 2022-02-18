@@ -6,7 +6,7 @@
 #    By: gcosta-d <gcosta-d@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/15 21:06:19 by gcosta-d          #+#    #+#              #
-#    Updated: 2022/02/17 04:13:41 by gcosta-d         ###   ########.fr        #
+#    Updated: 2022/02/17 23:44:22 by gcosta-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -110,7 +110,7 @@ $(OBJ_UTILS_PATH_BONUS)%.o: $(UTILS_PATH_BONUS)%.c
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJ_SRC_BONUS) $(OBJ_UTILS_BONUS)
-	gcc $(CFLAGS) -o $(NAME_BONUS) ./src_bonus/main_bonus.c $(OBJ_SRC_BONUS) $(OBJ_UTILS_BONUS) -I./includes_bonus -fsanitize=address
+	gcc $(CFLAGS) -o $(NAME_BONUS) ./src_bonus/main_bonus.c $(OBJ_SRC_BONUS) $(OBJ_UTILS_BONUS) -I./includes_bonus
 	$(SUCCESS)
 
 b_clean:
